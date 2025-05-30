@@ -1,9 +1,14 @@
 import arc.*;
+import java.awt.Color;
 
 public class CPTMarcus{
 	public static void main(String[] args){
-		Console con = new Console("Math Training Game",1920,1550);
-		
+		Console con = new Console("Math Training Game",960,540);
+//Main Menu Screen
+		con.setDrawColor(Color.WHITE);
+		con.fillRect(0,0,960,540);
+		con.setDrawColor(Color.BLACK);
+		con.drawString("Math Training Game", 390, 220);
 //Variables	
 		String strPlayerName;
 //Data
