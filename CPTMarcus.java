@@ -8,7 +8,10 @@ public class CPTMarcus{
 		con.setDrawColor(Color.WHITE);
 		con.fillRect(0,0,960,540);
 		con.setDrawColor(Color.BLACK);
-		con.drawString("Math Training Game", 390, 220);
+		con.drawString("Math Training Game", 380, 215);
+		con.drawString("Play [ P ] ", 380, 250);
+		con.drawString("Leaderboard [ L ]", 380, 285);
+		con.drawString("Add Quiz [ + ]", 380, 320);
 //Variables	
 		String strPlayerName;
 //Data
