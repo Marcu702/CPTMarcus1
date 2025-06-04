@@ -2,5 +2,4 @@ Addition Quiz
 Subtraction Quiz
 Multiplication Quiz
 Division Quiz
-
 Quadratic Quiz
