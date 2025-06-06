@@ -64,7 +64,7 @@ public class CPTMarcus{
 			con.drawString("Quit [ Q ]", 380, 355);
 			con.drawImage(Logo, 385,1);
 			con.repaint();
-			}else if(chrMenuOption == 's' || chrMenuOption == 'S'){
+			}else if(Character.toUpperCase(chrMenuOption) == 'S'){
 				con.setBackgroundColor(Color.BLACK);
 				con.println("What QUIZ would you like to do?");
 				con.println("(SELECT THE NUMBER CORRESPONDING WITH THE QUIZ ORDER)");
@@ -78,6 +78,11 @@ public class CPTMarcus{
 				con.repaint();
 				chrMenuOption = con.getChar();
 				if(chrMenuOption == '1'){
+					con.clear();
+					con.println("What is your name? ");
+					strName = con.readLine();
+					con.clear();
+					con.println("Player: "+strName);
 					TextInputFile additionquiz = new TextInputFile("AdditionQuiz.txt");
 					while(additionquiz.eof() == false){
 						strQuestion = additionquiz.readLine();
@@ -85,6 +90,7 @@ public class CPTMarcus{
 						dblAnswer2 = additionquiz.readDouble();
 						strAnswer3 = additionquiz.readLine();
 						con.println(strQuestion);
+						
 					}
 				}
 
