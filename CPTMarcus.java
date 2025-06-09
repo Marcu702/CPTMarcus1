@@ -8,54 +8,34 @@ public class CPTMarcus{
 		Console con = new Console("Math Training Game",960,540);
 //Varibles 
 		String strQuestion;
-		String strAnswer3;
 		String strName;
 		String strQuiz[];
+		String strEverything[][];
 		char chrMenuOption;
+		boolean blnOptions;
+		String strPAnswer;
 		int intCount; 
 		int QuizAmount = 0;
-		double dblAnswer1;
-		double dblAnswer2;
+		String strAnswer1[];
+		String strAnswer2[];
+		String strAnswer3[];
+		double dblPlayerAnswer;
 
 		
 //Main Menu Screen
 
 //Font and Logo
-		Font fnt = con.loadFont("", 30);
-		BufferedImage Logo = con.loadImage("Logo1.jpeg");
-		
-//Background
-		con.setDrawColor(Color.WHITE);
-		con.fillRect(0,0,960,540);
-		
-//Text
-		con.setDrawFont(fnt);
-		con.setDrawColor(Color.BLACK);
-		con.drawString("Math Training Game", 380, 215);
-		con.drawString("Play [ P ] ", 380, 250);
-		con.drawString("Leaderboard [ L ]", 380, 285);
-		con.drawString("Add Quiz [ A ]", 380, 320);
-		con.drawString("Quit [ Q ]", 380, 355);
-		con.drawImage(Logo, 385,1);
-
-		
-		con.repaint();
-	
-//Button Functions	
-		chrMenuOption = con.getChar();
-		System.out.println("entered Letter: "+chrMenuOption);
-//Play Button Funciton
-		if(chrMenuOption == 'P' || chrMenuOption == 'p'){
-			con.setBackgroundColor(Color.WHITE);			
-			con.setDrawColor(Color.BLACK);
-			con.drawString("Select Quiz [ S ]", 380, 250);
-			con.drawString("Return [ R ]", 380, 285);
-			chrMenuOption = con.getChar();
-//Return Menu Function
-			System.out.println("entered Letter: "+chrMenuOption);
-			chrMenuOption = con.getChar();
-			if(chrMenuOption == 'R' || chrMenuOption == 'r'){
-			con.setBackgroundColor(Color.WHITE);
+		blnOptions = true;
+		while(blnOptions == true){
+			Font fnt = con.loadFont("", 30);
+			BufferedImage Logo = con.loadImage("Logo1.jpeg");
+			
+	//Background
+			con.setDrawColor(Color.WHITE);
+			con.fillRect(0,0,960,540);
+			
+	//Text
+			con.setDrawFont(fnt);
 			con.setDrawColor(Color.BLACK);
 			con.drawString("Math Training Game", 380, 215);
 			con.drawString("Play [ P ] ", 380, 250);
@@ -63,52 +43,116 @@ public class CPTMarcus{
 			con.drawString("Add Quiz [ A ]", 380, 320);
 			con.drawString("Quit [ Q ]", 380, 355);
 			con.drawImage(Logo, 385,1);
+
+			
 			con.repaint();
-			}else if(Character.toUpperCase(chrMenuOption) == 'S'){
-				con.setBackgroundColor(Color.BLACK);
-				con.println("What QUIZ would you like to do?");
-				con.println("(SELECT THE NUMBER CORRESPONDING WITH THE QUIZ ORDER)");
-				strQuiz = new String[100];
-					TextInputFile quizoptions = new TextInputFile("Quizzies.txt");
-					for(intCount = 0; intCount < 5; intCount++){
-						strQuiz[intCount] = quizoptions.readLine();
-						con.println(strQuiz[intCount]);
-							}
-						quizoptions.close();
-				con.repaint();
+		
+	//Button Functions	
+			chrMenuOption = con.getChar();
+			System.out.println("entered Letter: "+chrMenuOption);
+	//Play Button Funciton
+			if(chrMenuOption == 'P' || chrMenuOption == 'p'){
+				con.setBackgroundColor(Color.WHITE);			
+				con.setDrawColor(Color.BLACK);
+				con.drawString("Select Quiz [ S ]", 380, 250);
+				con.drawString("Return [ R ]", 380, 285);
 				chrMenuOption = con.getChar();
-				if(chrMenuOption == '1'){
+	//Return Menu Function
+				System.out.println("entered Letter: "+chrMenuOption);
+				chrMenuOption = con.getChar();
+				if(chrMenuOption == 'R' || chrMenuOption == 'r'){
+				con.setBackgroundColor(Color.WHITE);
+				con.setDrawColor(Color.BLACK);
+				con.drawString("Math Training Game", 380, 215);
+				con.drawString("Play [ P ] ", 380, 250);
+				con.drawString("Leaderboard [ L ]", 380, 285);
+				con.drawString("Add Quiz [ A ]", 380, 320);
+				con.drawString("Quit [ Q ]", 380, 355);
+				con.drawImage(Logo, 385,1);
+				con.repaint();
+	//QUIZ SELECTION MENU
+				}else if(Character.toUpperCase(chrMenuOption) == 'S'){
 					con.clear();
-					con.println("What is your name? ");
-					strName = con.readLine();
-					con.clear();
-					con.println("Player: "+strName);
-					TextInputFile additionquiz = new TextInputFile("AdditionQuiz.txt");
-					while(additionquiz.eof() == false){
-						strQuestion = additionquiz.readLine();
-						dblAnswer1 = additionquiz.readDouble();
-						dblAnswer2 = additionquiz.readDouble();
-						strAnswer3 = additionquiz.readLine();
-						con.println(strQuestion);
-						
+					con.setBackgroundColor(Color.BLACK);
+					con.println("What QUIZ would you like to do?");
+					con.println("(SELECT THE NUMBER CORRESPONDING WITH THE QUIZ ORDER)");
+					strQuiz = new String[100];
+					TextInputFile quizoptions = new TextInputFile("Quizzies.txt");
+						for(intCount = 0; intCount < 5; intCount++){
+							strQuiz[intCount] = quizoptions.readLine();
+							con.println(strQuiz[intCount]);
+								}
+							quizoptions.close();
+					con.repaint();
+					chrMenuOption = con.getChar();
+	//CHOSEN TEST
+					if(chrMenuOption == '1'){
+						con.clear();
+						con.println("What is your name? ");
+						strName = con.readLine();
+						con.clear();
+						con.println("Player: "+strName);
+						TextInputFile additionquiz = new TextInputFile("AdditionQuiz.txt");
+						strEverything = new String[10][5];
+						strAnswer1 = new String[10];
+						strAnswer2 = new String[10];
+						strAnswer3 = new String[10];
+						intCount = 0;
+						while(additionquiz.eof() == false){
+							strQuestion = additionquiz.readLine();
+							strAnswer1[intCount] = additionquiz.readLine(); 
+							strAnswer2[intCount] = additionquiz.readLine();
+							strAnswer3[intCount] = additionquiz.readLine();
+							con.println(strQuestion);
+							con.println("Answer: ");
+							strPAnswer = con.readLine();
+							if(strPAnswer.equals(strAnswer1[intCount]) || strPAnswer.equals(strAnswer2[intCount]) || strPAnswer.equals(strAnswer3[intCount] )){
+								con.println("Correct");
+							}else{
+								con.println("Wrong");
+							}
+							intCount++;
+							
+						}
 					}
+
+					
+					
 				}
+			
+			}else if(Character.toUpperCase(chrMenuOption) == 'L' ){
+				con.clear();
+				con.setBackgroundColor(Color.WHITE);
 
-				
-				
+			
+			}else if(chrMenuOption == 'A' || chrMenuOption == 'a'){
+				con.clear();
+				con.setBackgroundColor(Color.WHITE);			
+
+			
+			}else if(chrMenuOption == 'Q' || chrMenuOption == 'q'){
+				con.setBackgroundColor(Color.WHITE);
+				con.setDrawColor(Color.BLACK);
+				con.drawString("Are you sure you want to quit?", 320, 215);
+				con.drawString("YES [ Y ]   NO [ N ] ", 380, 250);	
+				chrMenuOption = con.getChar();
+				if(chrMenuOption == 'Y' || chrMenuOption == 'y'){
+					con.closeConsole();
+				}else if(chrMenuOption == 'N' || chrMenuOption == 'n'){
+					con.setBackgroundColor(Color.WHITE);
+					con.setDrawColor(Color.BLACK);
+					con.drawString("Math Training Game", 380, 215);
+					con.drawString("Play [ P ] ", 380, 250);
+					con.drawString("Leaderboard [ L ]", 380, 285);
+					con.drawString("Add Quiz [ A ]", 380, 320);
+					con.drawString("Quit [ Q ]", 380, 355);
+					con.drawImage(Logo, 385,1);
+					con.repaint();
+					
+				}
+							
 			}
-		
-		}else if(chrMenuOption == 'L' || chrMenuOption == 'l' ){
-			con.setBackgroundColor(Color.WHITE);
-
-		
-		}else if(chrMenuOption == 'A' || chrMenuOption == 'a'){
-			con.setBackgroundColor(Color.WHITE);			
-
-		
-		}else if(chrMenuOption == 'Q' || chrMenuOption == 'q'){
-			con.setBackgroundColor(Color.WHITE);
-		}
+	}
 
 	
 //Data
