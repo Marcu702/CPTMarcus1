@@ -52,6 +52,7 @@ public class CPTMarcus{
 			System.out.println("entered Letter: "+chrMenuOption);
 	//Play Button Funciton
 			if(chrMenuOption == 'P' || chrMenuOption == 'p'){
+				con.clear();
 				con.setBackgroundColor(Color.WHITE);			
 				con.setDrawColor(Color.BLACK);
 				con.drawString("Select Quiz [ S ]", 380, 250);
@@ -59,15 +60,13 @@ public class CPTMarcus{
 				chrMenuOption = con.getChar();
 	//Return Menu Function
 				System.out.println("entered Letter: "+chrMenuOption);
-				chrMenuOption = con.getChar();
 				if(chrMenuOption == 'R' || chrMenuOption == 'r'){
-				con.setBackgroundColor(Color.WHITE);
-				con.setDrawColor(Color.BLACK);
+				con.setBackgroundColor(Color.BLACK);
 				con.drawString("Math Training Game", 380, 215);
 				con.drawString("Play [ P ] ", 380, 250);
 				con.drawString("Leaderboard [ L ]", 380, 285);
 				con.drawString("Add Quiz [ A ]", 380, 320);
-				con.drawString("Quit [ Q ]", 380, 355);
+				con.drawString("Rules [ R ]", 380, 355);
 				con.drawImage(Logo, 385,1);
 				con.repaint();
 	//QUIZ SELECTION MENU
@@ -86,12 +85,48 @@ public class CPTMarcus{
 					con.repaint();
 					chrMenuOption = con.getChar();
 	//CHOSEN TEST
-					if(chrMenuOption == '1'){
+					if(chrMenuOption == '2'){
+						quizoptions.close();
 						con.clear();
 						con.println("What is your name? ");
 						strName = con.readLine();
 						con.clear();
-						con.println("Player: "+strName);
+						TextInputFile subtractionquiz = new TextInputFile("SubtractionQuiz.txt");
+						strEverything = new String[10][5];
+						strAnswer1 = new String[10];
+						strAnswer2 = new String[10];
+						strAnswer3 = new String[10];
+						intCount = 0;
+						while(subtractionquiz.eof() == false){
+							strQuestion = subtractionquiz.readLine();
+							strAnswer1[intCount] = subtractionquiz.readLine(); 
+							strAnswer2[intCount] = subtractionquiz.readLine();
+							strAnswer3[intCount] = subtractionquiz.readLine();
+							con.println("Player: "+strName);
+							con.println(strQuestion);
+							con.print("Answer: ");
+							strPAnswer = con.readLine();
+							if(strPAnswer.equals(strAnswer1[intCount]) || strPAnswer.equals(strAnswer2[intCount]) || strPAnswer.equals(strAnswer3[intCount] )){
+								con.println("Correct");
+								con.sleep(1000);
+								con.clear();
+
+							}else{
+								con.println("Wrong");
+								con.sleep(1000);
+								con.clear();
+							}
+							intCount++;
+						}
+						con.println("YOU WILL RETURN TO MAIN MENU IN 10 SECONDS");
+						con.sleep(10000);
+						subtractionquiz.close();
+					}else if(chrMenuOption == '1'){
+												quizoptions.close();
+						con.clear();
+						con.println("What is your name? ");
+						strName = con.readLine();
+						con.clear();
 						TextInputFile additionquiz = new TextInputFile("AdditionQuiz.txt");
 						strEverything = new String[10][5];
 						strAnswer1 = new String[10];
@@ -103,22 +138,27 @@ public class CPTMarcus{
 							strAnswer1[intCount] = additionquiz.readLine(); 
 							strAnswer2[intCount] = additionquiz.readLine();
 							strAnswer3[intCount] = additionquiz.readLine();
+							con.println("Player: "+strName);
 							con.println(strQuestion);
-							con.println("Answer: ");
+							con.print("Answer: ");
 							strPAnswer = con.readLine();
 							if(strPAnswer.equals(strAnswer1[intCount]) || strPAnswer.equals(strAnswer2[intCount]) || strPAnswer.equals(strAnswer3[intCount] )){
 								con.println("Correct");
+								con.sleep(1000);
+								con.clear();
+
 							}else{
 								con.println("Wrong");
+								con.sleep(1000);
+								con.clear();
 							}
 							intCount++;
-							
 						}
-					}
-
-					
-					
+						con.println("YOU WILL RETURN TO MAIN MENU IN 10 SECONDS");
+						con.sleep(10000);
+						additionquiz.close();			
 				}
+			}
 			
 			}else if(Character.toUpperCase(chrMenuOption) == 'L' ){
 				con.clear();
@@ -152,6 +192,7 @@ public class CPTMarcus{
 				}
 							
 			}
+
 	}
 
 	

@@ -1,13 +1,39 @@
-1) 67 + 82 =
+1) 67 + 82 = ?
 149
 +149
 One Hundred Forty Nine
-2) 20 + 20 =
+2) 20 + 20 = ?
 40
 +40
 Forty
-3) 2315.6 + 4670.8 =
+3) 2315.6 + 4670.8 = ?
 6986.4
 +6986.4
-Six Thousand Nine Hundred Eighty Six Decemal Four
-
+Six Thousand Nine Hundred Eighty Six Decimal Four
+4) 60 + 780 = ?
+840
++840
+Eight Hundred Forty
+5) 962.48 + 200.73 = ?
+1163.21
++1163.21
+One Thousand Sixty Three Decimal Two One
+6) 2.35060 + 3.505691 = ?
+5.856291
++5.856291
+Five Decimal Eight Five Six Two Nine One
+7) 7.561 + 9.52 = ?
+17.081
++17.081
+Seventeen Decimal Zero Eight One
+8) 24.890 + 25.110 = ?
+50
++50
+Fifty
+9) -24051.152 + 438.725 = ?
+-23612.427
+Negative Twenty Three Thousand Six Hundred Tweleve Decimal Four Two Seven
+10) -200 + -150 = ?
+10) -200 + -150 = ?
+-350
+Negative Three Hundred Fifty
