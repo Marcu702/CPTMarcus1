@@ -1,5 +1,6 @@
-1) Addition Quiz [ 1 ]
-2) Subtraction Quiz [ 2 ]
-3) Multiplication Quiz [ 3 ]
-4) Division Quiz [ 4 ]
-5) Quadratic Quiz [ 5 ]
+AdditionQuiz
+SubtractionQuiz
+MultiplicationQuiz
+DivisionQuiz
+QuadraticQuiz
+LinerQuiz

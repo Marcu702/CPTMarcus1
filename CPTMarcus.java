@@ -13,13 +13,22 @@ public class CPTMarcus{
 		String strEverything[][];
 		char chrMenuOption;
 		boolean blnOptions;
+		boolean blnQuizAv;
+		boolean blnAddingQuest;
 		String strPAnswer;
 		int intCount; 
 		int QuizAmount = 0;
+		int intScore;
 		String strAnswer1[];
 		String strAnswer2[];
 		String strAnswer3[];
-		double dblPlayerAnswer;
+		String strQuizSelect;
+		String strFileName;
+		String strNewFileName;
+		String strQuizName;
+		String strNewQuestion;
+		double dblScorePercentage;
+
 
 		
 //Main Menu Screen
@@ -73,101 +82,144 @@ public class CPTMarcus{
 				}else if(Character.toUpperCase(chrMenuOption) == 'S'){
 					con.clear();
 					con.setBackgroundColor(Color.BLACK);
-					con.println("What QUIZ would you like to do?");
-					con.println("(SELECT THE NUMBER CORRESPONDING WITH THE QUIZ ORDER)");
 					strQuiz = new String[100];
 					TextInputFile quizoptions = new TextInputFile("Quizzies.txt");
-						for(intCount = 0; intCount < 5; intCount++){
-							strQuiz[intCount] = quizoptions.readLine();
-							con.println(strQuiz[intCount]);
-								}
+						while (!quizoptions.eof()) {
+							strQuiz[QuizAmount] = quizoptions.readLine();
+							con.println("- " + strQuiz[QuizAmount]);
+							QuizAmount++;
+						}
 							quizoptions.close();
+							
+							con.println();
+							con.println("NOTE: PLEASE ENTER THE QUIZ NAME EXACTLY HOW IT IS PRINTED");
+							con.print("Enter the name of the quiz you want to play: ");
+							strQuizSelect = con.readLine();
+								blnQuizAv = false;
+								for(intCount = 0; intCount < QuizAmount; intCount++){
+									if(strQuizSelect.equalsIgnoreCase(strQuiz[intCount])){
+										blnQuizAv = true;
+										break;
+									}
+								}
 					con.repaint();
-					chrMenuOption = con.getChar();
 	//CHOSEN TEST
-					if(chrMenuOption == '2'){
-						quizoptions.close();
+					if (blnQuizAv) {
 						con.clear();
 						con.println("What is your name? ");
 						strName = con.readLine();
 						con.clear();
-						TextInputFile subtractionquiz = new TextInputFile("SubtractionQuiz.txt");
+						
+						strFileName = strQuiz[intCount] + ".txt";
+						TextInputFile quizFile = new TextInputFile(strFileName);
 						strEverything = new String[10][5];
 						strAnswer1 = new String[10];
 						strAnswer2 = new String[10];
 						strAnswer3 = new String[10];
 						intCount = 0;
-						while(subtractionquiz.eof() == false){
-							strQuestion = subtractionquiz.readLine();
-							strAnswer1[intCount] = subtractionquiz.readLine(); 
-							strAnswer2[intCount] = subtractionquiz.readLine();
-							strAnswer3[intCount] = subtractionquiz.readLine();
-							con.println("Player: "+strName);
+						intScore = 0;
+						
+						while (!quizFile.eof()) {
+							strQuestion = quizFile.readLine();
+							strAnswer1[intCount] = quizFile.readLine(); 
+							strAnswer2[intCount] = quizFile.readLine();
+							strAnswer3[intCount] = quizFile.readLine();
+							dblScorePercentage = (intScore / (intCount + 1)) * 100;
+	
+							con.println("Player: " + strName + " [Current Score: "+intScore+"/"+(intCount)+"]");
 							con.println(strQuestion);
 							con.print("Answer: ");
 							strPAnswer = con.readLine();
-							if(strPAnswer.equals(strAnswer1[intCount]) || strPAnswer.equals(strAnswer2[intCount]) || strPAnswer.equals(strAnswer3[intCount] )){
+							if (strPAnswer.equals(strAnswer1[intCount]) || 
+								strPAnswer.equals(strAnswer2[intCount]) || 
+								strPAnswer.equals(strAnswer3[intCount])) {
 								con.println("Correct");
-								con.sleep(1000);
-								con.clear();
-
-							}else{
+								intScore++;
+							} else {
 								con.println("Wrong");
-								con.sleep(1000);
-								con.clear();
 							}
+							
+							con.sleep(1000);
+							con.clear();
 							intCount++;
-						}
+						}	
+						con.println("Quiz finished");
+						con.println("Your score: " + intScore + " out of " + intCount);
 						con.println("YOU WILL RETURN TO MAIN MENU IN 10 SECONDS");
 						con.sleep(10000);
-						subtractionquiz.close();
-					}else if(chrMenuOption == '1'){
-												quizoptions.close();
-						con.clear();
-						con.println("What is your name? ");
-						strName = con.readLine();
-						con.clear();
-						TextInputFile additionquiz = new TextInputFile("AdditionQuiz.txt");
-						strEverything = new String[10][5];
-						strAnswer1 = new String[10];
-						strAnswer2 = new String[10];
-						strAnswer3 = new String[10];
-						intCount = 0;
-						while(additionquiz.eof() == false){
-							strQuestion = additionquiz.readLine();
-							strAnswer1[intCount] = additionquiz.readLine(); 
-							strAnswer2[intCount] = additionquiz.readLine();
-							strAnswer3[intCount] = additionquiz.readLine();
-							con.println("Player: "+strName);
-							con.println(strQuestion);
-							con.print("Answer: ");
-							strPAnswer = con.readLine();
-							if(strPAnswer.equals(strAnswer1[intCount]) || strPAnswer.equals(strAnswer2[intCount]) || strPAnswer.equals(strAnswer3[intCount] )){
-								con.println("Correct");
-								con.sleep(1000);
-								con.clear();
-
-							}else{
-								con.println("Wrong");
-								con.sleep(1000);
-								con.clear();
-							}
-							intCount++;
-						}
-						con.println("YOU WILL RETURN TO MAIN MENU IN 10 SECONDS");
-						con.sleep(10000);
-						additionquiz.close();			
+						quizFile.close();
+					} else {
+					con.println("Invalid quiz name. Please try again.");
+					con.sleep(2000);
+					}
 				}
-			}
+			
+
 			
 			}else if(Character.toUpperCase(chrMenuOption) == 'L' ){
 				con.clear();
 				con.setBackgroundColor(Color.WHITE);
 
-			
+
 			}else if(chrMenuOption == 'A' || chrMenuOption == 'a'){
 				con.clear();
-				con.setBackgroundColor(Color.WHITE);			
+				con.setBackgroundColor(Color.BLACK);
+				con.println("WHEN MAKING A QUIZ ENSURE THERE IS NO SPACES WITHIN THE QUIZ NAME");
+				con.println("What is the name of the quiz you want to add?");
+				strQuizName = con.readLine();	
+				strNewFileName = strQuizName + ".txt";
+				TextOutputFile newQuizFile = new TextOutputFile(strNewFileName + ".txt");
+				TextOutputFile quizoptions = new TextOutputFile("Quizzies.txt",true);
+				quizoptions.println(strQuizName);
+				quizoptions.close();
+				
+				con.clear();
+				con.println("RULES: ADD QUESTIONS");
+				con.println("AFTER EACH QUESTION ADD THREE OR TWO ANSWERS FOR THAT QUESTION");
+				con.println("Example:");
+				con.println("1 + 1 = ?");
+				con.println(" 2 ");
+				con.println("+2");
+				con.println("Two");
+				con.println("type DONE when finsihed");
+				
+				blnAddingQuest = true;
+				intCount = 0;
+				strAnswer1 = new String[100];
+				strAnswer2 = new String[100];
+				strAnswer3 = new String[100];
+				while(blnAddingQuest){
+					con.println("Enter question or 'done' if finished");
+					strNewQuestion = con.readLine();
+					if(strNewQuestion.equalsIgnoreCase("done")){
+						blnAddingQuest = false;
+					}else{
+						con.print("Answer 1: ");
+						strAnswer1[intCount] = con.readLine();
+						con.print("Answer 2: ");
+						strAnswer2[intCount] = con.readLine();
+						con.print("Answer 3: ");
+						strAnswer3[intCount] = con.readLine();
+						
+						newQuizFile.println(strNewQuestion);
+						newQuizFile.println(strAnswer1[intCount]);
+						newQuizFile.println(strAnswer2[intCount]);
+						newQuizFile.println(strAnswer3[intCount]);
+						intCount++;
+						
+						
+					}
+				}
+				newQuizFile.close();
+				con.println("QUIZ: "	+strQuizName+ " has been added");
+				con.sleep(5000);
+			
+		
+				
+
+				
+				
+
 
 			
 			}else if(chrMenuOption == 'Q' || chrMenuOption == 'q'){
