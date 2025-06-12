@@ -1,6 +1,4 @@
 AdditionQuiz
 SubtractionQuiz
-MultiplicationQuiz
-DivisionQuiz
-QuadraticQuiz
-LinerQuiz
+
+
